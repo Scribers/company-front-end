@@ -2,24 +2,39 @@
 <html>
 <head>
     <title>LookingForJob Manager</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="icon" type="image/png" href="./ressources/images/icon.png" />
-    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-2.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/html5shiv-printshiv.js"></script>
     <script src="js/html5shiv.js"></script>
-    <script src="js/jquery-2.2.1.min.js"></script>
     <meta charset="utf-8">
 </head>
 <body>
-<div id="container">
-    <?php include "./includes/accountBar.php"; ?>
-<?php include "./includes/header.php"; ?>
-<?php include "./includes/nav.php"; ?>
-<div id="content">
+
+<div class="container">
+<?php include("includes/nav.php") ?>
+
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4">.col-md-4</div>
+    </div>
 
 </div>
-<?php include"./includes/footer.php" ?>
-</div>
+
+<script src="js/active.js"></script>
+<script>setActive("index");</script>
 </body>
 </html>

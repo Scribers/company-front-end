@@ -1,0 +1,6 @@
+body {
+    padding-top: 60px;
+}
+.btn-success :hover {
+    background-color: #4aaf51 !important;
+}
