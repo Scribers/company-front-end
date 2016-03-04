@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>zdqcsclk</title>
+    <title>LookingForJob Manager</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="icon" type="image/png" href="./ressources/images/icon.png" />
