@@ -5,10 +5,10 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="icon" type="image/png" href="./ressources/images/icon.png" />
-    <script src="js/jquery-2.0.3.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/html5shiv-printshiv.js"></script>
     <script src="js/html5shiv.js"></script>
+    <script src="js/jquery-2.2.1.min.js"></script>
     <meta charset="utf-8">
 </head>
 <body>
