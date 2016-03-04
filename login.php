@@ -40,11 +40,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>Bootstrap</strong> Login Form</h1>
+                    <h1><strong>LookingforWork Manager</strong> Formulaire d'inscription</h1>
                     <div class="description">
                         <p>
-                            This is a free responsive login form made with Bootstrap.
-                            Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!
+                            Entrez vos identifiants pour vous inscrire !
                         </p>
                     </div>
                 </div>
@@ -53,41 +52,88 @@
                 <div class="col-sm-6 col-sm-offset-3 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
-                            <h3>Login to our site</h3>
-                            <p>Enter your username and password to log on:</p>
+                            <h3>Se connecter à un compte LookingForWork</h3>
+                            <p>Entrez votre nom de compte et votre mot de passe :</p>
                         </div>
                         <div class="form-top-right">
                             <i class="fa fa-key"></i>
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
+                        <?php
+                        $erreur = array();
+                        if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
+                            //Verification des champs
+                            if ( empty( $_POST[ 'email' ] ) ) {
+                                $erreur['email']="Veuillez entrer une adresse email.";
+                            } else {
+                                $e = mysql_real_escape_string($_POST[ 'email' ] );
+                            }
+                            if ( empty( $_POST[ 'password' ] ) ) {
+                                $erreur['password']="Veuillez entrer un mot de passe.";
+                            } else {
+                                $pwd = mysql_real_escape_string($_POST[ 'password' ] );
+                            }
+                            if ( empty( $erreur ) ) { //si pas d'erreur
+                                $q = "SELECT id FROM t_user WHERE username=:u";
+                                $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                $sth->bindParam(':u', $u, PDO::PARAM_STR, 24);
+                                $sth->execute();
+                                if ( $sth->rowCount()!= 0 ) {
+                                    $erreur['user'] = "Nom d'utilisateur déjà utilisé.";
+                                }
+                                $q = "SELECT id FROM t_user WHERE email=:e";
+                                $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                $sth->bindParam(':e', $e, PDO::PARAM_STR, 24);
+                                $sth->execute();
+                                if ( $sth->rowCount()!= 0 ) {
+                                    $erreur['email'] = 'Adresse email déjà utilisée.';
+                                }
+                            }
+                            if ( empty( $erreur ) ) { //si pas d'erreur
+                                $q = "INSERT INTO t_user ( id , username , password, email, company) VALUES ('',:u, :pwd, :e, :c)";
+                                $sth = $dbc -> prepare($q);
+                                $r = $sth ->execute(array(':u'=>$u,':pwd'=>SHA1($pwd),':e'=>$e,':c'=>$c));
+
+                                if ( $r ) {
+                                    echo '<h1>Connexion réussie!</h1>
+                            <p>Vous êtes maintenant connecté.</p>
+                            <p>Vous allez être redirigé !</p>';
+                                    echo "</div></div>";
+                                    include ( 'includes/footer.php' );
+                                    $url = "connect.php";
+                                    function redirige($url)
+                                    {
+                                        die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
+                                    }
+                                    redirige($url);
+                                }
+                                exit();
+                            }
+                        }
+                        ?>
+                        <form class="form-horizontal" method="post" role="form">
+                            <span id="titleForm">Inscription</span>
                             <div class="form-group">
-                                <label class="sr-only" for="form-username">Username</label>
-                                <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+                                <label for="emailRegister" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" <?php if(isset($_POST['email']) && empty($erreur['email'])){echo 'value="'.$_POST['email'].'"';} ?> name="email" placeholder="Email">
+                                    <?php if(isset($_POST['email']) && !empty($erreur['email'])){echo '<span class="text-danger">'.$erreur['email'].'</span>';}?>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-password">Password</label>
-                                <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                <label for="passwordRegister" class="col-sm-3 control-label">Mot de passe</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" <?php if(isset($_POST['password']) && empty($erreur['password'])){echo 'value="'.$_POST['password'].'"';} ?> name="password" placeholder="Mot de passe">
+                                    <?php if(isset($_POST['password']) && !empty($erreur['password'])){echo '<span class="text-danger">'.$erreur['password'].'</span>';}?>
+                                </div>
                             </div>
-                            <button type="submit" class="btn">Sign in!</button>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <button type="submit" class="btn btn-default">Se connecter</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 social-login">
-                    <h3>...or login with:</h3>
-                    <div class="social-login-buttons">
-                        <a class="btn btn-link-1 btn-link-1-facebook" href="#">
-                            <i class="fa fa-facebook"></i> Facebook
-                        </a>
-                        <a class="btn btn-link-1 btn-link-1-twitter" href="#">
-                            <i class="fa fa-twitter"></i> Twitter
-                        </a>
-                        <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-                            <i class="fa fa-google-plus"></i> Google Plus
-                        </a>
                     </div>
                 </div>
             </div>
