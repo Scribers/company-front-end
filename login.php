@@ -40,10 +40,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>LookingforWork Manager</strong> Formulaire d'inscription</h1>
+                    <h1><strong>LookingforWork Manager</strong><br/> Formulaire de connexion</h1>
                     <div class="description">
                         <p>
-                            Entrez vos identifiants pour vous inscrire !
+                            Entrez vos identifiants pour vous connecter !
                         </p>
                     </div>
                 </div>
