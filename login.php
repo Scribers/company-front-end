@@ -38,6 +38,7 @@
 
     <div class="inner-bg">
         <div class="container">
+            <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
                     <h1><strong>LookingforWork Manager</strong><br/> Formulaire de connexion</h1>
@@ -144,7 +145,7 @@
 
 
 <!-- Javascript -->
-<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.min.js"></script>
 <script src="js/scripts.js"></script>

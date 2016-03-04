@@ -38,6 +38,7 @@
 
     <div class="inner-bg">
         <div class="container">
+            <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
                     <h1><strong>LookingforWork Manager</strong><br/> Formulaire d'inscription</h1>
