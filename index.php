@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>LookingForJob Manager</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="icon" type="image/png" href="./ressources/images/icon.png" />
     <script src="js/jquery-2.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/html5shiv-printshiv.js"></script>
     <script src="js/html5shiv.js"></script>
     <meta charset="utf-8">
