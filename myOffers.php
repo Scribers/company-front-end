@@ -75,6 +75,8 @@
 <script>setActive("myOffers");</script>
 <script>
 
+    jQuery.support.cors = true;
+
     $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
         console.log(data);
     });
