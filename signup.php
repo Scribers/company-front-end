@@ -53,7 +53,7 @@
             return false;
         }
 
-        var datarray = "{ company : '" + company + "' , email : '" + email + "' , password : '" + password + "' }";
+        var datarray = { "company" : company , "email" : email , "password" : password };
         alert(datarray);
         $.ajax({
             type: 'POST',
