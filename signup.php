@@ -53,9 +53,10 @@
             return false;
         }
 
-        var datarray = { "company" : company , "email" : email , "password" : password };
+        var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
         $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray);
+        console.log("sent");
         /*,
          function(data) {
          var dataparsed = JSON.parse(data);
