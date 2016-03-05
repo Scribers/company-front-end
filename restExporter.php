@@ -1,34 +1,24 @@
 <?php
-function CallAPI($method, $url, $data = false)
+function curl_post($route, array $post = NULL, array $options = array())
 {
-$curl = curl_init();
+    $url = "restful-api.eu-gb.mybluemix.net".$route;
+    $defaults = array(
+        CURLOPT_POST => 1,
+        CURLOPT_HEADER => 0,
+        CURLOPT_URL => $url,
+        CURLOPT_FRESH_CONNECT => 1,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_FORBID_REUSE => 1,
+        CURLOPT_TIMEOUT => 4,
+        CURLOPT_POSTFIELDS => http_build_query($post)
+    );
 
-switch ($method)
-{
-case "POST":
-curl_setopt($curl, CURLOPT_POST, 1);
-
-if ($data)
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-break;
-case "PUT":
-curl_setopt($curl, CURLOPT_PUT, 1);
-break;
-default:
-if ($data)
-$url = sprintf("%s?%s", $url, http_build_query($data));
-}
-
-// Optional Authentication:
-//curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-//curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-
-curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-$result = curl_exec($curl);
-
-curl_close($curl);
-
-return $result;
-} ?>
+    $ch = curl_init();
+    curl_setopt_array($ch, ($options + $defaults));
+    if( ! $result = curl_exec($ch))
+    {
+        trigger_error(curl_error($ch));
+    }
+    curl_close($ch);
+    return $result;
+}  ?>

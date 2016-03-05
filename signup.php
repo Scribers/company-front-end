@@ -61,81 +61,29 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                            <?php
-                            $erreur = array();
-                            if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
-                            //Verification des champs
-                            if ( empty( $_POST[ 'company' ] ) ) {
-                                $erreur['company']="Veuillez entrer un nom de compagnie.";
-                            } else {
-                                $c = mysql_real_escape_string($_POST[ 'company' ] );
-                            }
-                            if ( empty( $_POST[ 'email' ] ) ) {
-                                $erreur['email']="Veuillez entrer une adresse email.";
-                            } else {
-                                $e = mysql_real_escape_string($_POST[ 'email' ] );
-                            }
-                            if ( empty( $_POST[ 'password' ] ) ) {
-                                $erreur['password']="Veuillez entrer un mot de passe.";
-                            } else {
-                                $pwd = mysql_real_escape_string($_POST[ 'password' ] );
-                            }
-                            if( empty($erreur)){ //si pas d'erreur
-                                if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                                 $erreur['email'] = "Email incorrect !";
-                                }
-                            }
-                            if ( empty( $erreur ) ) { //si pas d'erreur
-                                $data = array();
-                                $data['email'] = $e;
-                                $data['password'] = sha1($pwd);
-                                $data['company'] = $c;
-
-                                $r = CallAPI(POST, "/companies/create", json_encode($data));//todo set good route
-                                $r = json_decode($r);
-                            if ( $r ) {
-                            echo '<h1>Inscription réussie!</h1>
-                            <p>Vous êtes maintenant enregistré.</p>
-                            <p>Vous allez être redirigé !</p>';
-                                echo "</div></div>";
-                                include ( 'includes/footer.php' );
-                                $url = "connect.php";
-                                function redirige($url)
-                                {
-                                die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
-                                }
-                                redirige($url);
-                            }
-                            exit();
-                        }
-                    }
-                    ?>
-                    <form class="form-horizontal" method="post" role="form">
+                    <form class="form-horizontal" method="post" role="form" action="post_signup.php">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
                             <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" <?php if(isset($_POST['company']) && empty($erreur['company'])){echo 'value="'.$_POST['company'].'"';} ?> name="company" placeholder="Entreprise">
-                                <?php if(isset($_POST['company']) && !empty($erreur['company'])){echo '<span class="text-danger">'.$erreur['company'].'</span>';}?>
+                                <input type="text" name="company" placeholder="Entreprise"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="emailRegister" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" <?php if(isset($_POST['email']) && empty($erreur['email'])){echo 'value="'.$_POST['email'].'"';} ?> name="email" placeholder="Email">
-                                <?php if(isset($_POST['email']) && !empty($erreur['email'])){echo '<span class="text-danger">'.$erreur['email'].'</span>';}?>
+                                <input type="email" name="email" placeholder="Email"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="passwordRegister" class="col-sm-3 control-label">Mot de passe</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" <?php if(isset($_POST['password']) && empty($erreur['password'])){echo 'value="'.$_POST['password'].'"';} ?> name="password" placeholder="Mot de passe">
-                                <?php if(isset($_POST['password']) && !empty($erreur['password'])){echo '<span class="text-danger">'.$erreur['password'].'</span>';}?>
+                                <input type="password" name="password" placeholder="Mot de passe"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
-                                <button type="submit" class="btn btn-default">S'inscrire</button>
+                                <input type="submit" class="btn btn-default">S'inscrire</input>
                             </div>
                         </div>
                     </form>
