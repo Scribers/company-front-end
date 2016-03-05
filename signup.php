@@ -59,7 +59,7 @@
         datarray.append('password', password);
         $.ajax({
             type: 'POST',
-            url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
+            url: 'https://restful-api.eu-gb.mybluemix.net/companies/create',
             crossDomain: true,
             data: JSON.stringify(datarray),
             dataType: 'json',
