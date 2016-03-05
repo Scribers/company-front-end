@@ -30,8 +30,13 @@
     </table>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <canvas id="qrcode-area" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-1">
+        <button type="button" class="btn btn-default" aria-label="Left Align" onclick="printCanvas()">
+            <span class="glyphicon glyphicon-print" aria-hidden="true">Imprimer</span>
+        </button>
         </div>
     </div>
 </div>
@@ -47,6 +52,8 @@
 <script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
     $.get("http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function (data) {
+        data = {"status":"success","content":[{"id":43,"company_id":42,"title":"Hello!"},{"id":46,"company_id":42,"title":"Hello2"}]};
+
         console.log(data); //TODO: remove this shit
         $.each(data.content, function (index, value) {
             $("tbody#table-body").append('<tr><td>' + value.title + '</td>' +
@@ -56,7 +63,7 @@
                 '<td><a href="offer.php?id=' + value.id + '">' +
                 '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
                 '<span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a>' +
-                '<a href="#" onclick="getQRCode(this)" qrcode-data="' + value.id + ',' + value.name + ',' + value.description + '">' +
+                '<a href="#" onclick="getQRCode(this)" offer="'+ value.name +'" qrcode-data="' + value.id + ',' + value.name + ',' + value.description + '">' +
                 '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
                 '<span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
         });
@@ -84,6 +91,26 @@
             "fontname": "sans",
             "value": "H"
         });
+        $(myCanvas).attr("text", $(button).attr("offer"));
+    }
+
+    function printCanvas()
+    {
+        var dataUrl = document.getElementById('qrcode-area').toDataURL(); //attempt to save base64 string to server using this var
+        var windowContent = '<!DOCTYPE html>';
+        windowContent += '<html>';
+        windowContent += '<head><title>'+ $("canvas#qrcode-area").attr("text") +'</title></head>';
+        windowContent += '<body>';
+        windowContent += '<img src="' + dataUrl + '">';
+        windowContent += '</body>';
+        windowContent += '</html>';
+        var printWin = window.open('','','width=340,height=260');
+        printWin.document.open();
+        printWin.document.write(windowContent);
+        printWin.document.close();
+        printWin.focus();
+        printWin.print();
+        printWin.close();
     }
 </script>
 </body>
