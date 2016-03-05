@@ -5,7 +5,7 @@
     <link id="bootstrap-sheet" rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css">
-    <link rel="icon" type="image/png" href="img/icon.png" />
+    <link rel="icon" type="image/png" href="img/icon.png"/>
     <script src="js/jquery-2.2.1.min.js"></script>
     <meta charset="utf-8">
 </head>
@@ -19,6 +19,8 @@
         <thead>
         <tr>
             <th>Titre de l'offre</th>
+            <th>Type</th>
+            <th>Rom ID</th>
             <th>Date</th>
             <th></th>
         </tr>
@@ -33,9 +35,6 @@
             <canvas id="qrcode-area" width="400" height="400"></canvas>
         </div>
     </div>
-
-<!--    <div hidden="hidden" id="logo"><img src="img/logo.png"> </div>-->
-
 </div>
 
 <script src="js/bootstrap.min.js"></script>
@@ -48,13 +47,19 @@
 <script>setActive("myOffers");</script>
 <script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
-    $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
-        data = {"status":"success","content":[{"id":43,"company_id":42,"title":"Hello!"},{"id":46,"company_id":42,"title":"Hello2"}]};
-
+    $.get("http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function (data) {
         console.log(data); //TODO: remove this shit
-        $.each(data.content, function( index, value ) {
-            $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a><a href="#" onclick="getQRCode(this)" qrcode-data="'+ value.id + ',' + value.name +',' + value.description + '"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
-
+        $.each(data.content, function (index, value) {
+            $("tbody#table-body").append('<tr><td>' + value.title + '</td>' +
+                '<td>' + value.type + '</td>' +
+                '<td>' + value.rom_id + '</td>' +
+                '<td data-dateformat="DD-MMM-YYYY">' + (index + 1) + ' janvier 2014</td>' +
+                '<td><a href="offer.php?id=' + value.id + '">' +
+                '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
+                '<span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a>' +
+                '<a href="#" onclick="getQRCode(this)" qrcode-data="' + value.id + ',' + value.name + ',' + value.description + '">' +
+                '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
+                '<span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
         });
     });
 </script>
@@ -63,10 +68,10 @@
     img.src = 'img/logo-transparent-qr.png'; // Définit le chemin vers sa source
 </script>
 <script>
-    function getQRCode(button){
+    function getQRCode(button) {
         myCanvas = document.getElementById("qrcode-area");
         context = myCanvas.getContext("2d");
-        context.clearRect(0,0,myCanvas.width,myCanvas.height);
+        context.clearRect(0, 0, myCanvas.width, myCanvas.height);
         $(myCanvas).qrcode({
             "size": 400,
             "color": "#3a3",

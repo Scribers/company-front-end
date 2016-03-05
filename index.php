@@ -14,7 +14,16 @@
 
     <div class="row">
         <div class="col-md-2"> <img class="img-responsive" src="img/logo.png" alt="Chania"> </div>
-        <div class="col-md-10"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor nibh in mi ultricies, dictum consequat orci consectetur. Integer tincidunt ante et nulla maximus, vitae rutrum erat pulvinar. Fusce non ullamcorper erat, tempus consectetur nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur elementum dapibus mauris ac hendrerit. Pellentesque malesuada commodo urna, sit amet maximus orci gravida quis.</p><p>Nullam tempor eros et eleifend venenatis. Pellentesque sed iaculis mauris. Curabitur tempor arcu quis cursus suscipit. Nam euismod lacinia purus, ac convallis erat convallis at. Fusce dignissim pulvinar lorem nec vehicula. Donec lorem odio, consectetur vitae leo ut, consequat semper erat. </p></div>
+        <div class="col-md-10"><h1>Bienvenue sur QRJob !</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tempor nibh in mi ultricies,
+                dictum consequat orci consectetur. Integer tincidunt ante et nulla maximus, vitae rutrum erat pulvinar.
+                Fusce non ullamcorper erat, tempus consectetur nibh. Cum sociis natoque penatibus et magnis dis
+                parturient montes, nascetur ridiculus mus. Curabitur elementum dapibus mauris ac hendrerit.
+                Pellentesque malesuada commodo urna, sit amet maximus orci gravida quis.</p>
+            <p>Nullam tempor eros et eleifend venenatis. Pellentesque sed iaculis mauris.
+                Curabitur tempor arcu quis cursus suscipit. Nam euismod lacinia purus, ac convallis erat convallis at.
+                Fusce dignissim pulvinar lorem nec vehicula. Donec lorem odio, consectetur vitae leo ut,
+                consequat semper erat. </p></div>
     </div>
 
 </div>
