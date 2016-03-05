@@ -71,6 +71,7 @@
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
+                console.log(responseData);
                 alert('POST failed.'+ responseData.status);
             }
         });
