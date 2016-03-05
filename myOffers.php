@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" aria-label="Left Align" onclick="printCanvas()">
-                        <span class="glyphicon glyphicon-print" aria-hidden="true">Imprimer</span>
+                        <span class="glyphicon glyphicon-print" aria-hidden="true"> Imprimer</span>
                     </button>
                 </div>
             </div>
