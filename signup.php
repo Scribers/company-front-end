@@ -55,17 +55,18 @@
 
         var datarray = { "company" : company , "email" : email , "password" : password };
         alert(datarray);
-        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray/*,
-            function(data) {
-                var dataparsed = JSON.parse(data);
-                if(dataparsed.status == "success") {
-                    alert("success");
-                    setCookie("id", dataparsed.id, 0);
-                }else{
-                    alert("Status failed!");
-                }
-            }*/
-        );
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray);
+        console.log(data);
+        /*,
+         function(data) {
+         var dataparsed = JSON.parse(data);
+         if(dataparsed.status == "success") {
+         alert("success");
+         setCookie("id", dataparsed.id, 0);
+         }else{
+         alert("Status failed!");
+         }
+         }*/
     }
 </script>
 
