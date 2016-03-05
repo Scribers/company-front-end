@@ -54,6 +54,7 @@
         }
 
         var datarray = "{company :" + company + ", email : " + email + ", password : " + password + "}";
+        alert(datarray);
         $.ajax({
             type: 'POST',
             url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
