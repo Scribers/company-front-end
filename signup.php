@@ -55,7 +55,7 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        console.log($.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
+        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
             dataparsed = JSON.parse(data);
             console.log("hello");
             if(dataparsed.status == "success") {
@@ -65,7 +65,8 @@
             }else{
                 alert("Status failed!");
             }
-        }));
+        });
+        console.log(res);
         console.log("sent");
     }
 </script>
