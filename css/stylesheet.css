@@ -1,6 +1,11 @@
 body {
     padding-top: 80px;
 }
+
 .btn-success :hover {
     background-color: #4aaf51 !important;
+}
+
+a[qrcode-data] {
+    margin-left: 10px;
 }

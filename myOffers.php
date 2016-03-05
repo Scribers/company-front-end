@@ -64,7 +64,10 @@
 </script>
 <script>
     function getQRCode(button){
-        $("canvas#qrcode-area").empty().qrcode({
+        myCanvas = document.getElementById("qrcode-area");
+        context = myCanvas.getContext("2d");
+        context.clearRect(0,0,myCanvas.width,myCanvas.height);
+        $(myCanvas).qrcode({
             "size": 400,
             "color": "#3a3",
             "text": $(button).attr('qrcode-data'),
