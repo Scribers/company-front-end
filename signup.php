@@ -66,7 +66,7 @@
                             if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
                             //Verification des champs
                             if ( empty( $_POST[ 'company' ] ) ) {
-                                $erreur['company']="Veuillez entrer un nom.";
+                                $erreur['company']="Veuillez entrer un nom de compagnie.";
                             } else {
                                 $c = mysql_real_escape_string($_POST[ 'company' ] );
                             }
@@ -81,46 +81,33 @@
                                 $pwd = mysql_real_escape_string($_POST[ 'password' ] );
                             }
                             if( empty($erreur)){ //si pas d'erreur
-                            if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-                            $erreur['email'] = "Email incorrect !";
-                            }
-                            }
-                            if ( empty( $erreur ) ) { //si pas d'erreur
-                            $q = "SELECT id FROM t_user WHERE username=:u";
-                            $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                            $sth->bindParam(':u', $u, PDO::PARAM_STR, 24);
-                            $sth->execute();
-                            if ( $sth->rowCount()!= 0 ) {
-                            $erreur['user'] = "Nom d'utilisateur déjà utilisé.";
-                            }
-                            $q = "SELECT id FROM t_user WHERE email=:e";
-                            $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                            $sth->bindParam(':e', $e, PDO::PARAM_STR, 24);
-                            $sth->execute();
-                            if ( $sth->rowCount()!= 0 ) {
-                            $erreur['email'] = 'Adresse email déjà utilisée.';
-                            }
+                                if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+                                 $erreur['email'] = "Email incorrect !";
+                                }
                             }
                             if ( empty( $erreur ) ) { //si pas d'erreur
-                            $q = "INSERT INTO t_user ( id , username , password, email, company) VALUES ('',:u, :pwd, :e, :c)";
-                            $sth = $dbc -> prepare($q);
-                            $r = $sth ->execute(array(':u'=>$u,':pwd'=>SHA1($pwd),':e'=>$e,':c'=>$c));
+                                $data = array();
+                                $data['email'] = $e;
+                                $data['password'] = sha1($pwd);
+                                $data['company'] = $c;
 
+                                $r = CallAPI(POST, "/companies/create", json_encode($data));//todo set good route
+                                $r = json_decode($r);
                             if ( $r ) {
                             echo '<h1>Inscription réussie!</h1>
                             <p>Vous êtes maintenant enregistré.</p>
                             <p>Vous allez être redirigé !</p>';
-                            echo "</div></div>";
-                    include ( 'includes/footer.php' );
-                    $url = "connect.php";
-                    function redirige($url)
-                    {
-                    die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
-                    }
-                    redirige($url);
-                    }
-                    exit();
-                    }
+                                echo "</div></div>";
+                                include ( 'includes/footer.php' );
+                                $url = "connect.php";
+                                function redirige($url)
+                                {
+                                die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
+                                }
+                                redirige($url);
+                            }
+                            exit();
+                        }
                     }
                     ?>
                     <form class="form-horizontal" method="post" role="form">
