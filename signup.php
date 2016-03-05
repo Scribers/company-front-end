@@ -37,11 +37,10 @@
 
 <script>
     function success(data, status, jqXHR) {
-        dataparsed = JSON.parse(data);
-        console.log("hello");
-        if(dataparsed.status == "success") {
+        console.log(data);
+        if(data.status == "success") {
             alert("success");
-            Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
+            Cookies.set('id', data.id, { expires: 0, path: '/' });
             console.log(Cookies.get('id'));
         }else{
             alert("Status failed!");
