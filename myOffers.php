@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css">
     <link rel="icon" type="image/png" href="./ressources/images/icon.png" />
+    <script src="js/jquery-2.2.1.min.js"></script>
     <meta charset="utf-8">
 </head>
 <body>
@@ -14,30 +15,59 @@
     <?php include("includes/nav.php") ?>
     <?php include("phpqrcode/qrlib.php") ?>
 
+    <script>
+        jQuery.support.cors = true;
+
+        var jsonVar = {"status":"success","content":[{"id":43,"company_id":42,"title":"Hello!"},{"id":46,"company_id":42,"title":"Hello2"}]};
+
+
+        /*$.ajax({
+            type: 'GET',
+            url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
+            data: { get_param: 'value' },
+            dataType:'json',
+            success: function (data) {
+                var content = data.content;
+                $('#test').html(content);
+            }
+        });*/
+
+
+    </script>
+
     <table class="table table-bordered table-striped sortable">
         <thead>
         <tr>
-            <th>Title1</th>
-            <th>Title2</th>
-            <th>Title3</th>
+            <th>Titre de l'offre</th>
+            <th>Date</th>
+            <th></th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="table-body">
         <tr>
-            <td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td>
             <td>aaaa</td>
-            <td>test 3</td>
+            <td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td>
+            <td><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span>
+                </button></td>
         </tr>
         <tr>
-            <td data-dateformat="DD-MMM-YYYY">26 janvier 2013</td>
             <td>bbbb</td>
-            <td>test 33</td>
+            <td data-dateformat="DD-MMM-YYYY">26 janvier 2013</td>
+            <td><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span>
+                </button></td>
         </tr>
         </tbody>
     </table>
 
-    <?php
+    <div id="test"></div>
 
+
+
+
+<!--    --><?php
+/*
     //set it to writable location, a place for temp generated PNG files
     $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
 
@@ -64,12 +94,10 @@
 
     //display generated file
     echo '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
-
-    //QRcode::png('some othertext 1234'); ?>
+ */?>
 
 </div>
 
-<script src="js/jquery-2.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/html5shiv-printshiv.js"></script>
 <script src="js/html5shiv.js"></script>
@@ -78,5 +106,10 @@
 <script>moment.locale("fr")</script>
 <script src="js/active.js"></script>
 <script>setActive("myOffers");</script>
+<script>
+    $.each(jsonVar.content, function( index, value ) {
+        $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
+    });
+</script>
 </body>
 </html>
