@@ -68,7 +68,7 @@
                 console.log(responseData);
                 alert('POST failed.'+ responseData.status);
             }
-        });
+        );
     }
 </script>
 
