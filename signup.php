@@ -57,6 +57,7 @@
         console.log(datarray);
         $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
             var dataparsed = JSON.parse(data);
+            console.log("hello");
             if(dataparsed.status == "success") {
                 alert("success");
                 Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
