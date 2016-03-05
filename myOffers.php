@@ -75,33 +75,10 @@
 <script>setActive("myOffers");</script>
 <script>
 
-    jQuery.support.cors = true;
-    $.ajax({
-        type: 'GET',
-        url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
-        dataType:'json',
-        crossDomain : true,
-        success: function (data) {
-            //var content = data.content;
-            console.log(data);
-            $.each(data.content, function( index, value ) {
-                $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
-            });
-        }
-    });
-
     $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
-        console.log(data);
-        alert( "Load was performed." );
-    });
-
-    $.ajax({
-        type: 'GET',
-        url: 'https://bootswatch.com/api/3.json',
-        dataType:'json',
-        success: function (data) {
-            console.log(data);
-        }
+        $.each(data.content, function( index, value ) {
+            $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
+        });
     });
 
 </script>
