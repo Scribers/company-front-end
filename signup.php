@@ -67,7 +67,7 @@
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
         res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
-        console.log(res.toJSON());
+        console.log(res);
         console.log("sent");
     }
 </script>
