@@ -31,6 +31,7 @@
 
     <!-- cookies gestion -->
     <script src="js/cookies.js"></script>
+    <script src="js/autosize.min.js"></script>
 </head>
 
 <body>
@@ -68,10 +69,7 @@
 </script>
 
 <!-- Top content -->
-<div class="top-content">
-
-    <div class="inner-bg">
-        <div class="container">
+        <div class="container" style="margin-top: 70px;">
             <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
@@ -99,21 +97,22 @@
                         <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="createOffer.php" method="post">
                             <span id="titleForm">Inscription</span>
                             <div class="form-group">
-                                <label for="nomRegister" class="col-sm-3 control-label">Intitulé</label>
+                                <label for="nomRegister" class="col-sm-4 control-label">Intitulé</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="title" placeholder="Intitulé"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nomRegister" class="col-sm-3 control-label">Type</label>
+                                <label for="nomRegister" class="col-sm-4 control-label">Type</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="type" placeholder="Type (CDD, CDI, Stage, ...)"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nomRegister" class="col-sm-3 control-label">Description</label>
+                                <label for="nomRegister" class="col-sm-4 control-label">Description</label>
                                 <div class="col-sm-8">
-                                    <textarea rows="5" type="text" name="desc" placeholder="Description ..."></textarea>
+                                    <textarea maxlength="400" class="form-control" rows="5"
+                                              style="max-width:100%;min-width: 100%;resize: none;" type="text" name="desc" placeholder="Description ..."></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,9 +125,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
 
 
 <!-- Javascript -->
@@ -136,6 +132,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.min.js"></script>
 <script src="js/scripts.js"></script>
+<script>
+    autosize($('textarea'));
+</script>
 
 <!--[if lt IE 10]>
 <script src="js/placeholder.js"></script>
