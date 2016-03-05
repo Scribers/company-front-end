@@ -75,7 +75,7 @@
             <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>LookingforWork Manager</strong><br/> Creation d'une proposition d'emploi</h1>
+                    <h1><strong>QRJob Manager</strong><br/> Creation d'une proposition d'emploi</h1>
                     <div class="description">
                         <p>
                             Décrivez le job !
