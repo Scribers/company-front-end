@@ -69,7 +69,7 @@
                     alert("success");
                     setCookie("id", dataparsed.id, 0);
                 }else{
-                    alert("Status failed");
+                    alert("Status failed!");
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
