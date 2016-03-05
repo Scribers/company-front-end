@@ -59,7 +59,7 @@
         datarray.append('password', password);
         $.ajax({
             type: 'POST',
-            url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
+            url: 'http://restful-api.eu-gb.mybluemix.net/users/create',
             crossDomain: true,
             data: JSON.stringify(datarray),
             dataType: 'json',
@@ -72,7 +72,7 @@
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
-                alert('POST failed.');
+                alert('POST failed.'+ responseData);
             }
         });
     }
