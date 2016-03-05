@@ -31,6 +31,7 @@
 
     <!-- cookies gestion -->
     <script src="js/cookies.js"></script>
+    <script src="js/autosize.min.js"></script>
 </head>
 
 <body>
@@ -98,7 +99,7 @@
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>Créer un compte QRJob</h3>
-                            <p>Entrez votre nom de compte et votre mot de passe :</p>
+                            <p>Entrez les informations vous concernant</p>
                         </div>
                         <div class="form-top-right">
                             <i class="fa fa-user"></i>
@@ -109,37 +110,37 @@
                     <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
-                            <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
+                            <label for="nomRegister" class="col-sm-4 control-label">Entreprise</label>
                             <div class="col-sm-8">
                                 <input type="text" name="company" placeholder="Entreprise"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="emailRegister" class="col-sm-3 control-label">Email</label>
+                            <label for="emailRegister" class="col-sm-4 control-label">Email</label>
                             <div class="col-sm-8">
                                 <input type="email" name="email" placeholder="Email"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="passwordRegister" class="col-sm-3 control-label">Mot de passe</label>
+                            <label for="passwordRegister" class="col-sm-4 control-label">Mot de passe</label>
                             <div class="col-sm-8">
                                 <input type="password" name="password" placeholder="Mot de passe"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="passwordRegister" class="col-sm-3 control-label">Description courte</label>
+                            <label for="passwordRegister" class="col-sm-4 control-label">Description courte</label>
                             <div class="col-sm-8">
-                                <input type="text" name="short_desc" placeholder="Description courte de votre entreprise"/>
+                                <textarea maxlength="100" class="form-control" rows="5" style="max-width:100%;min-width: 100%;resize: none;" type="text" name="short_desc" placeholder="Description courte de votre entreprise"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="passwordRegister" class="col-sm-3 control-label">Description complète</label>
-                            <div class="col-xl-8">
-                                <input type="text" name="desc" placeholder="Description complète de votre entreprise"/>
+                            <label for="passwordRegister" class="col-sm-4 control-label">Description complète</label>
+                            <div class="col-sm-8">
+                                <textarea maxlength="400" class="form-control" rows="5" style="max-width:100%;min-width: 100%;resize: none;" type="text" name="desc" placeholder="Description complète de votre entreprise"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-8">
+                            <div class="col-sm-offset-4 col-sm-8">
                                 <input type="submit" class="btn btn-default" value="S'inscrire !"/>
                             </div>
                         </div>
@@ -158,6 +159,9 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.min.js"></script>
 <script src="js/scripts.js"></script>
+<script>
+    autosize($('textarea'));
+</script>
 
 <!--[if lt IE 10]>
 <script src="js/placeholder.js"></script>
