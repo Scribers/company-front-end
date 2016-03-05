@@ -59,7 +59,7 @@
             var dataparsed = JSON.parse(data);
             if(dataparsed.status == "success") {
                 alert("success");
-                setCookie("id", dataparsed.id, 0);
+                Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
             }else{
                 alert("Status failed!");
             }
