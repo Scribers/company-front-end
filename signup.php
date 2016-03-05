@@ -36,7 +36,7 @@
 <body>
 
 <script>
-    function success(data) {
+    function success(data, status, jqXHR) {
         dataparsed = JSON.parse(data);
         console.log("hello");
         if(dataparsed.status == "success") {
@@ -66,8 +66,7 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
-        console.log(res.responseText);
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
         console.log("sent");
     }
 </script>
