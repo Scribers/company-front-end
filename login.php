@@ -35,6 +35,15 @@
 
 <body>
 <script>
+    function success(data, status, jqXHR) {
+        console.log(data);
+        if(data.status === "successful") {
+            Cookies.set('id', data.id, { expires: 0, path: '/' });
+            console.log(Cookies.get('id'));
+        }else{
+            alert("Connexion échouée!");
+        }
+    }
     function sendForm() {
         var email = document.forms["signupForm"]["email"].value;
         var password = document.forms["signupForm"]["password"].value;
@@ -47,30 +56,8 @@
             return false;
         }
 
-        var data = new FormData();
-        data.append('email', email);
-        data.append('password', password);
-
-        var url = "http://restful-api.eu-gb.mybluemix.net/login";
-        var client = new XMLHttpRequest();
-        client.open("POST", url);
-        client.setRequestHeader("Content-Type", "text/plain");
-        client.crossDomain = true;
-        client.send(data);
-        if (client.status == 200) {
-            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
-            var response = client.responseText.toJSON();
-            if (response['status'] == 'success') {
-                setCookie("id", response['id'], 0);
-            }
-            else {
-                alert("Erreur! Mauvais mail/Mot de passe!");
-            }
-        }
-        else {
-            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
-        }
-        client.close();
+        var datarray = {"mail" : email , "password" : password };
+        $.post("https://restful-api.eu-gb.mybluemix.net/login", datarray, success);
     }
 </script>
 

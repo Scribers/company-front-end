@@ -38,18 +38,19 @@
 <script>
     function success(data, status, jqXHR) {
         console.log(data);
-        if(data.status == "success") {
-            alert("success");
+        if(data.status == "successful") {
+            alert("successful");
             Cookies.set('id', data.id, { expires: 0, path: '/' });
-            console.log(Cookies.get('id'));
         }else{
-            alert("Status failed!");
+            alert("Inscription ratée!");
         }
     }
     function sendForm() {
         var company = document.forms["signupForm"]["company"].value;
         var email = document.forms["signupForm"]["email"].value;
         var password = document.forms["signupForm"]["password"].value;
+        var short_desc = document.forms["signupForm"]["short_desc"].value;
+        var desc = document.forms["signupForm"]["desc"].value;
         if (company == null || company == "") {
             alert("Vous devez entrer un nom d'entreprise!");
             return false;
@@ -62,11 +63,17 @@
             alert("Vous devez choisir un mot de passe!");
             return false;
         }
+        if (short_desc == null || short_desc == "") {
+            alert("Vous devez choisir un mot de passe!");
+            return false;
+        }
+        if (desc == null || desc == "") {
+            desc = short_desc;
+        }
 
-        var datarray = { "name" : company , "mail" : email , "password" : password };
-        console.log(datarray);
-        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
-        console.log("sent");
+        var datarray = { "name" : company , "mail" : email , "password" : password ,
+            "short_description" : short_desc, "description" : desc, "details" : null};
+        $.post("https://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
     }
 </script>
 
@@ -116,6 +123,18 @@
                             <label for="passwordRegister" class="col-sm-3 control-label">Mot de passe</label>
                             <div class="col-sm-8">
                                 <input type="password" name="password" placeholder="Mot de passe"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordRegister" class="col-sm-3 control-label">Description courte</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="short_desc" placeholder="Description courte de votre entreprise"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordRegister" class="col-sm-3 control-label">Description complète</label>
+                            <div class="col-xl-8">
+                                <input type="text" name="desc" placeholder="Description complète de votre entreprise"/>
                             </div>
                         </div>
                         <div class="form-group">
