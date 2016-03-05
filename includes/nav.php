@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Looking4Work manager</a>
+            <a class="navbar-brand" href="index.php">QRJob</a>
         </div>
         <div id="bs-example-navbar-collapse-1" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
