@@ -91,6 +91,21 @@
         }
     });
 
+    $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
+        console.log(data);
+        alert( "Load was performed." );
+    });
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://bootswatch.com/api/3.json',
+        data: { get_param: 'value' },
+        dataType:'json',
+        success: function (data) {
+            console.log(data);
+        }
+    });
+
 </script>
 </body>
 </html>
