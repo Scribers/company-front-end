@@ -59,20 +59,21 @@
         datarray.append('password', password);
         $.ajax({
             type: 'POST',
-            url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
+            url: 'http://restful-api.eu-gb.mybluemix.net/users/create',
             crossDomain: true,
             data: JSON.stringify(datarray),
             dataType: 'json',
             success: function(responseData, textStatus, jqXHR) {
                 var dataparsed = JSON.parse(responseData);
                 if(dataparsed.status == "success") {
+                    alert("success");
                     setCookie("id", dataparsed.id, 0);
                 }else{
                     alert("Status failed");
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
-                alert('POST failed.');
+                alert('POST failed.'+ responseData.status);
             }
         });
     }
