@@ -29,10 +29,12 @@
     </table>
 
     <div class="row">
-        <div class="col-md-6">
-            <canvas id="qrcode-area"></canvas>
+        <div class="col-md-12">
+            <canvas id="qrcode-area" width="400" height="400"></canvas>
         </div>
     </div>
+
+<!--    <div hidden="hidden" id="logo"><img src="img/logo.png"> </div>-->
 
 </div>
 
@@ -47,7 +49,9 @@
 <script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
     $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
-        console.log(data);
+        data = {"status":"success","content":[{"id":43,"company_id":42,"title":"Hello!"},{"id":46,"company_id":42,"title":"Hello2"}]};
+
+        console.log(data); //TODO: remove this shit
         $.each(data.content, function( index, value ) {
             $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a><a href="#" onclick="getQRCode(this)" qrcode-data="'+ value.id + ',' + value.name +',' + value.description + '"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
 
@@ -55,15 +59,23 @@
     });
 </script>
 <script>
+    var img = new Image();   // Crée un nouvel objet Image
+    img.src = 'img/logo-transparent-qr.png'; // Définit le chemin vers sa source
+</script>
+<script>
     function getQRCode(button){
         $("canvas#qrcode-area").empty().qrcode({
-            "size": 100,
+            "size": 400,
             "color": "#3a3",
-            "text": button.attr('qrcode-data'),
+            "text": $(button).attr('qrcode-data'),
             "label": "QRJob",
-            "fontColor": "#0080C0",
+            "fontcolor": "#0080C0",
             "fill": "#004080",
-            "mode": 2
+            "mode": 4,
+            "image": img,
+            "mSize": 0.13,
+            "fontname": "sans",
+            "value": "H"
         });
     }
 </script>
