@@ -60,6 +60,7 @@
             if(dataparsed.status == "success") {
                 alert("success");
                 Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
+                console.log(Cookies.get('id'));
             }else{
                 alert("Status failed!");
             }
