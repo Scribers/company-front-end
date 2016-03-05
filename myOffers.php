@@ -13,7 +13,6 @@
 
 <div class="container">
     <?php include("includes/nav.php") ?>
-    <?php include("phpqrcode/qrlib.php") ?>
 
     <table class="table table-bordered table-striped sortable">
         <thead>
