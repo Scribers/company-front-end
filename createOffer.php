@@ -35,28 +35,35 @@
 
 <body>
 <script>
+    function success(data, status, jqXHR) {
+        console.log(data);
+        if(data.status === "successful") {
+            Cookies.set('id', data.id, { expires: 0, path: '/' });
+            console.log(Cookies.get('id'));
+        }else{
+            alert("Connexion échouée!");
+        }
+    }
     function sendForm() {
         var title = document.forms["signupForm"]["title"].value;
-        if (title == null || title== "") {
-            alert("Vous devez spécifier un email!");
+        var type = document.forms["signupForm"]["type"].value;
+        var desc = document.forms["signupForm"]["description"].value;
+        if (title == null || title == "") {
+            alert('Vous devez spécifier un titre !(par exemple : "logisticien"');
+            return false;
+        }
+        if (type == null || type == "") {
+            alert("Vous devez spécifier le type de contrat! (CDD, CDI, Stage, ...)");
+            return false;
+        }
+        if (desc == null || desc == "") {
+            alert("Vous devez décrire le job!");
             return false;
         }
 
-        var data = new FormData();
-        data.append('title', title);
-
-        var url = "http://restful-api.eu-gb.mybluemix.net/login";
-        var client = new XMLHttpRequest();
-        client.open("POST", url);
-        client.setRequestHeader("Content-Type", "text/plain");
-        client.send(data);
-        if (client.status == 200)
-            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText)
-        else
-            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
-        client.close();
-        document.cookie.toJSON()
-        document.cookie['lol'] = 4;
+        var datarray = {"title" : title , "company_id" : Cookies.get("id"),
+                        "type" : type , "description" : desc};
+        $.post("https://restful-api.eu-gb.mybluemix.net/offers/create", datarray, success);
     }
 </script>
 
@@ -68,7 +75,7 @@
             <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>LookingforWork Manager</strong><br/> Creation d'une proposition d'emploi</h1>
+                    <h1><strong>QRJob Manager</strong><br/> Creation d'une proposition d'emploi</h1>
                     <div class="description">
                         <p>
                             Décrivez le job !
@@ -94,6 +101,18 @@
                                 <label for="nomRegister" class="col-sm-3 control-label">Intitulé</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="title" placeholder="Intitulé"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nomRegister" class="col-sm-3 control-label">Type</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="type" placeholder="Type (CDD, CDI, Stage, ...)"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nomRegister" class="col-sm-3 control-label">Description</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="desc" placeholder="Description ..."/>
                                 </div>
                             </div>
                             <div class="form-group">
