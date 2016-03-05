@@ -20,7 +20,47 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="signup.php">S'inscrire <span class="sr-only">(current)</span></a></li>
                 <li><a href="login.php">Se connecter</a></li>
+                <li id="theme-selector">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Thème
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
 </nav>
+
+<script>
+    $('link#bootstrap-sheet').attr('href',Cookies.get('theme'));
+</script>
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'https://bootswatch.com/api/3.json',
+        data: { get_param: 'value' },
+        dataType:'json',
+        success: function (data) {
+            $.each(data.themes, function( index, theme ) {
+                $('#theme-selector').find('ul.dropdown-menu').append('<li><a href="#" theme-url="'+ theme.cssMin +'">'+ theme.name +'</a></li>');
+//                console.log(theme.name);
+//                console.log(theme.cssMin);
+            });
+            $('#theme-selector').find('ul.dropdown-menu').find('a').each(function( index ) {
+                $(this).click(function() {
+                    setTheme($(this).attr("theme-url"));
+                });
+            });
+        }
+    });
+</script>
+<script>
+    function setTheme(url){
+        Cookies.set('theme', url, { expires: 7, path: '/' });
+        $('link#bootstrap-sheet').attr('href',Cookies.get('theme'));
+    }
+</script>
