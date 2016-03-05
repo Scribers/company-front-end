@@ -57,14 +57,14 @@
 <script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
     $.get("http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function (data) {
-        data = {
+        /*data = {
             "status": "success",
             "content": [{"id": 43, "company_id": 42, "title": "Hello!"}, {
                 "id": 46,
                 "company_id": 42,
                 "title": "Hello2"
             }]
-        };
+        };*/
 
         console.log(data); //TODO: remove this shit
         $.each(data.content, function (index, value) {
