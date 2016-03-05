@@ -29,6 +29,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <!-- cookies gestion -->
+    <script src="js/cookies.js"></script>
 </head>
 
 <body>
@@ -58,18 +60,14 @@
 
         var url = "http://restful-api.eu-gb.mybluemix.net/companies/create";
         var client = new XMLHttpRequest();
-        alert("0");
         client.open("POST", url);
-        alert("1");
         client.setRequestHeader("Content-Type", "text/plain");
-        alert("1.5");
         client.send(data);
-        alert("2");
         if (client.status == 200)
-            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText)
+            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
+            setCookie("id", client.responseText.toJSON()['company_id'], 0);
         else
             alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
-        alert(client.responseText);
         client.close();
     }
 </script>
@@ -124,7 +122,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
-                                <input type="submit" class="btn btn-default">S'inscrire</input>
+                                <input type="submit" class="btn btn-default" value="S'inscrire !"/>
                             </div>
                         </div>
                     </form>
