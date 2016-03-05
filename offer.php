@@ -15,28 +15,6 @@
     <?php include("includes/nav.php") ?>
     <?php include("phpqrcode/qrlib.php") ?>
 
-    <script src="js/get-parser.js"></script>
-    <script>
-        jQuery.support.cors = true;
-
-        var id = getUrlParameter("id");
-        alert(id);
-        /*$.ajax({
-         type: 'GET',
-         url: 'http://restful-api.eu-gb.mybluemix.net/offers/'+id,
-         data: { get_param: 'value' },
-         dataType:'json',
-         success: function (data) {
-         var content = data.content;
-         $('#test').html(content);
-         }
-         });*/
-
-        var jsonVar = {"status":"success","content":{"id":42,"company_id":43,"title":"My sexy job offer."}};
-
-
-    </script>
-
     <table class="table table-bordered table-striped sortable">
         <thead>
         <tr>
@@ -59,8 +37,18 @@
 <script src="js/moment-with-locales.js"></script>
 <script>moment.locale("fr")</script>
 <script src="js/active.js"></script>
+<script src="js/get-parser.js"></script>
 <script>
-    $("tbody#table-body").append('<tr><td>' + jsonVar.content.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td></tr>');
+    var id = getUrlParameter("id");
+    $.ajax({
+        type: 'GET',
+        url: 'http://restful-api.eu-gb.mybluemix.net/offers/'+id,
+        data: { get_param: 'value' },
+        dataType:'json',
+        success: function (data) {
+            $('#test').html(data.content);
+        }
+    });
 </script>
 </body>
 </html>

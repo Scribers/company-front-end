@@ -15,26 +15,6 @@
     <?php include("includes/nav.php") ?>
     <?php include("phpqrcode/qrlib.php") ?>
 
-    <script>
-        jQuery.support.cors = true;
-
-        var jsonVar = {"status":"success","content":[{"id":43,"company_id":42,"title":"Hello!"},{"id":46,"company_id":42,"title":"Hello2"}]};
-
-
-        /*$.ajax({
-            type: 'GET',
-            url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
-            data: { get_param: 'value' },
-            dataType:'json',
-            success: function (data) {
-                var content = data.content;
-                $('#test').html(content);
-            }
-        });*/
-
-
-    </script>
-
     <table class="table table-bordered table-striped sortable">
         <thead>
         <tr>
@@ -44,20 +24,7 @@
         </tr>
         </thead>
         <tbody id="table-body">
-        <tr>
-            <td>aaaa</td>
-            <td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td>
-            <td><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span>
-                </button></td>
-        </tr>
-        <tr>
-            <td>bbbb</td>
-            <td data-dateformat="DD-MMM-YYYY">26 janvier 2013</td>
-            <td><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span>
-                </button></td>
-        </tr>
+
         </tbody>
     </table>
 
@@ -107,9 +74,22 @@
 <script src="js/active.js"></script>
 <script>setActive("myOffers");</script>
 <script>
-    $.each(jsonVar.content, function( index, value ) {
-        $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
+
+    jQuery.support.cors = true;
+    $.ajax({
+        type: 'GET',
+        url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
+        data: { get_param: 'value' },
+        dataType:'json',
+        success: function (data) {
+            //var content = data.content;
+            console.log(data);
+            $.each(data.content, function( index, value ) {
+                $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
+            });
+        }
     });
+
 </script>
 </body>
 </html>
