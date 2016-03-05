@@ -55,7 +55,7 @@
 
         var datarray = { "company" : company , "email" : email , "password" : password };
         alert(datarray);
-        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray,
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray/*,
             function(data) {
                 var dataparsed = JSON.parse(data);
                 if(dataparsed.status == "success") {
@@ -64,7 +64,8 @@
                 }else{
                     alert("Status failed!");
                 }
-            });
+            }*/
+        );
     }
 </script>
 
