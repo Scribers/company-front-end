@@ -28,40 +28,11 @@
         </tbody>
     </table>
 
-    <div id="test"></div>
-
-
-
-
-<!--    --><?php
-/*
-    //set it to writable location, a place for temp generated PNG files
-    $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
-
-    //html PNG location prefix
-    $PNG_WEB_DIR = 'temp/';
-
-    if (!file_exists($PNG_TEMP_DIR))
-        mkdir($PNG_TEMP_DIR);
-
-
-    $filename = $PNG_TEMP_DIR.'test.png';
-
-    //processing form input
-    //remember to sanitize user input in real-life solution !!!
-    $errorCorrectionLevel = 'H';
-    if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
-        $errorCorrectionLevel = $_REQUEST['level'];
-
-    $matrixPointSize = 8;
-    if (isset($_REQUEST['size']))
-        $matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
-
-    QRcode::png('PHP QR Code :)', $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-
-    //display generated file
-    echo '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
- */?>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="qrcode-area"></canvas>
+        </div>
+    </div>
 
 </div>
 
@@ -73,14 +44,28 @@
 <script>moment.locale("fr")</script>
 <script src="js/active.js"></script>
 <script>setActive("myOffers");</script>
+<script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
-
     $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
+        console.log(data);
         $.each(data.content, function( index, value ) {
-            $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');
+            $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a><a href="#" onclick="getQRCode(this)" qrcode-data="'+ value.id + ',' + value.name +',' + value.description + '"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
+
         });
     });
-
+</script>
+<script>
+    function getQRCode(button){
+        $("canvas#qrcode-area").empty().qrcode({
+            "size": 100,
+            "color": "#3a3",
+            "text": button.attr('qrcode-data'),
+            "label": "QRJob",
+            "fontColor": "#0080C0",
+            "fill": "#004080",
+            "mode": 2
+        });
+    }
 </script>
 </body>
 </html>
