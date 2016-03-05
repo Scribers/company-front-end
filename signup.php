@@ -36,6 +36,17 @@
 <body>
 
 <script>
+    function success(data) {
+        dataparsed = JSON.parse(data);
+        console.log("hello");
+        if(dataparsed.status == "success") {
+            alert("success");
+            Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
+            console.log(Cookies.get('id'));
+        }else{
+            alert("Status failed!");
+        }
+    }
     function sendForm() {
         var company = document.forms["signupForm"]["company"].value;
         var email = document.forms["signupForm"]["email"].value;
@@ -55,17 +66,7 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
-            dataparsed = JSON.parse(data);
-            console.log("hello");
-            if(dataparsed.status == "success") {
-                alert("success");
-                Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
-                console.log(Cookies.get('id'));
-            }else{
-                alert("Status failed!");
-            }
-        });
+        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
         console.log(res);
         console.log("sent");
     }
