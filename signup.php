@@ -64,8 +64,7 @@
                 }else{
                     alert("Status failed!");
                 }
-            },
-             function (responseData, textStatus, errorThrown) {
+            }, function (responseData, textStatus, errorThrown) {
                 console.log(responseData);
                 alert('POST failed.'+ responseData.status);
             }
