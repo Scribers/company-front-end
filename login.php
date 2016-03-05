@@ -62,6 +62,7 @@
                     </div>
                     <div class="form-bottom">
                         <?php
+                        include ( 'restExporter.php' );
                         $erreur = array();
                         if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
                             //Verification des champs
@@ -76,9 +77,11 @@
                                 $pwd = mysql_real_escape_string($_POST[ 'password' ] );
                             }
                             if ( empty( $erreur ) ) { //si pas d'erreur todo change request
-                                $q = "INSERT INTO t_user ( id , username , password, email, company) VALUES ('',:u, :pwd, :e, :c)";
-                                $sth = $dbc -> prepare($q);
-                                $r = $sth ->execute(array(':u'=>$u,':pwd'=>SHA1($pwd),':e'=>$e,':c'=>$c));
+                                $data = array();
+                                $data['email'] = $e;
+                                $data['password'] = sha1($pwd);
+
+                                $r = CallAPI(POST, "/companies/connect", json_encode($data));//todo set good route
 
                                 if ( $r ) {
                                     echo '<h1>Connexion réussie!</h1>
