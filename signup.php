@@ -36,12 +36,11 @@
 <body>
 
 <script>
-    function success(data) {
-        dataparsed = JSON.parse(data);
-        console.log("hello");
-        if(dataparsed.status == "success") {
+    function success(data, status, jqXHR) {
+        console.log(data);
+        if(data.status == "success") {
             alert("success");
-            Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
+            Cookies.set('id', data.id, { expires: 0, path: '/' });
             console.log(Cookies.get('id'));
         }else{
             alert("Status failed!");
@@ -66,8 +65,7 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
-        console.log(res);
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
         console.log("sent");
     }
 </script>
