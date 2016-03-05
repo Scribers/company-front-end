@@ -44,7 +44,6 @@
     $.ajax({
         type: 'GET',
         url: 'https://bootswatch.com/api/3.json',
-        data: { get_param: 'value' },
         dataType:'json',
         success: function (data) {
             $.each(data.themes, function( index, theme ) {

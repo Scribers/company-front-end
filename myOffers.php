@@ -79,7 +79,6 @@
     $.ajax({
         type: 'GET',
         url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
-        data: { get_param: 'value' },
         dataType:'json',
         crossDomain : true,
         success: function (data) {
@@ -99,7 +98,6 @@
     $.ajax({
         type: 'GET',
         url: 'https://bootswatch.com/api/3.json',
-        data: { get_param: 'value' },
         dataType:'json',
         success: function (data) {
             console.log(data);
