@@ -53,16 +53,12 @@
             return false;
         }
 
-        var datarray = new FormData();
-        datarray.append('company', company);
-        datarray.append('email', email);
-        datarray.append('password', password);
-        alert(JSON.stringify(datarray));
+        var datarray = "{company :" + company + ", email : " + email + ", password : " + password + "}";
         $.ajax({
             type: 'POST',
             url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
             crossDomain: true,
-            data: JSON.stringify(datarray),
+            data: datarray,
             dataType: 'json',
             success: function(responseData, textStatus, jqXHR) {
                 var dataparsed = JSON.parse(responseData);
