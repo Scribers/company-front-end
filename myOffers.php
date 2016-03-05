@@ -74,7 +74,7 @@
 <script src="js/active.js"></script>
 <script>setActive("myOffers");</script>
 <script>
-    
+
     $.get( "http://restful-api.eu-gb.mybluemix.net/companies/0/offers", function( data ) {
         $.each(data.content, function( index, value ) {
             $("tbody#table-body").append('<tr><td>' + value.title + '</td><td data-dateformat="DD-MMM-YYYY">23 janvier 2014</td><td><a href="offer.php?id='+ value.id +'"><button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> <span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a></td></tr>');

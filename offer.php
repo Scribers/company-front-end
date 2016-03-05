@@ -40,15 +40,11 @@
 <script src="js/get-parser.js"></script>
 <script>
     var id = getUrlParameter("id");
-    $.ajax({
-        type: 'GET',
-        url: 'http://restful-api.eu-gb.mybluemix.net/offers/'+id,
-        data: { get_param: 'value' },
-        dataType:'json',
-        success: function (data) {
-            $('#test').html(data.content);
-        }
+
+    $.get( "http://restful-api.eu-gb.mybluemix.net/offers/"+id, function( data ) {
+        $('#test').html(data.content);
     });
+
 </script>
 </body>
 </html>
