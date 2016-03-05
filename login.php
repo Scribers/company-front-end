@@ -38,7 +38,7 @@
     function sendForm() {
         var email = document.forms["signupForm"]["email"].value;
         var password = document.forms["signupForm"]["password"].value;
-        if (email == null || email== "") {
+        if (email == null || email == "") {
             alert("Vous devez spécifier un email!");
             return false;
         }
@@ -57,15 +57,19 @@
         client.setRequestHeader("Content-Type", "text/plain");
         client.crossDomain = true;
         client.send(data);
-        if (client.status == 200)
+        if (client.status == 200) {
             alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
-            /*var response = client.responseText.toJSON();
-            if(response['status'] == 'success')
+            var response = client.responseText.toJSON();
+            if (response['status'] == 'success') {
                 setCookie("id", response['id'], 0);
-            else
-                alert("Erreur! Mauvais mail/Mot de passe!");*/
-        else
+            }
+            else {
+                alert("Erreur! Mauvais mail/Mot de passe!");
+            }
+        }
+        else {
             alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        }
         client.close();
     }
 </script>

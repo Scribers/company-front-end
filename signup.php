@@ -64,11 +64,13 @@
         client.setRequestHeader("Content-Type", "text/plain");
         client.crossDomain = true;
         client.send(data);
-        if (client.status == 200)
+        if (client.status == 200) {
             alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
             //setCookie("id", client.responseText.toJSON()['company_id'], 0);
-        else
+        }
+        else {
             alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        }
         client.close();
     }
 </script>
