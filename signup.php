@@ -55,13 +55,8 @@
 
         var datarray = { "company" : company , "email" : email , "password" : password };
         alert(datarray);
-        $.ajax({
-            type: 'POST',
-            url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
-            crossDomain: true,
-            data: datarray,
-            dataType: 'json',
-            success: function(responseData, textStatus, jqXHR) {
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray,
+            function(responseData, textStatus, jqXHR) {
                 var dataparsed = JSON.parse(responseData);
                 if(dataparsed.status == "success") {
                     alert("success");
@@ -69,12 +64,11 @@
                 }else{
                     alert("Status failed!");
                 }
-            },
-            error: function (responseData, textStatus, errorThrown) {
+            }, function (responseData, textStatus, errorThrown) {
                 console.log(responseData);
                 alert('POST failed.'+ responseData.status);
             }
-        });
+        );
     }
 </script>
 
