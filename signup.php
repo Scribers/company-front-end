@@ -36,6 +36,17 @@
 <body>
 
 <script>
+    function success(data) {
+        dataparsed = JSON.parse(data);
+        console.log("hello");
+        if(dataparsed.status == "success") {
+            alert("success");
+            Cookies.set('id', dataparsed.id, { expires: 0, path: '/' });
+            console.log(Cookies.get('id'));
+        }else{
+            alert("Status failed!");
+        }
+    }
     function sendForm() {
         var company = document.forms["signupForm"]["company"].value;
         var email = document.forms["signupForm"]["email"].value;
@@ -55,15 +66,8 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
-            var dataparsed = JSON.parse(data);
-            if(dataparsed.status == "success") {
-                alert("success");
-                setCookie("id", dataparsed.id, 0);
-            }else{
-                alert("Status failed!");
-            }
-        });
+        res = $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
+        console.log(res);
         console.log("sent");
     }
 </script>
@@ -96,7 +100,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" <!--action="signup.php"--> method="post">
+                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
                             <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
