@@ -61,8 +61,12 @@
         var url = "http://restful-api.eu-gb.mybluemix.net/companies/create";
         var client = new XMLHttpRequest();
         client.open("POST", url);
+        alert("0");
         client.setRequestHeader("Content-Type", "text/plain");
+        client.crossDomain = true;
+        alert("1");
         client.send(data);
+        alert("2");
         if (client.status == 200)
             alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
             setCookie("id", client.responseText.toJSON()['company_id'], 0);
