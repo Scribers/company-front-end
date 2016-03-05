@@ -33,6 +33,47 @@
 
 <body>
 
+<script>
+    function sendForm() {
+        var company = document.forms["signupForm"]["company"].value;
+        var email = document.forms["signupForm"]["email"].value;
+        var password = document.forms["signupForm"]["password"].value;
+        if (company == null || company == "") {
+            alert("Vous devez entrer un nom d'entreprise!");
+            return false;
+        }
+        if (email == null || email== "") {
+            alert("Vous devez entrer un email!");
+            return false;
+        }
+        if (password == null || password == "") {
+            alert("Vous devez choisir un mot de passe!");
+            return false;
+        }
+
+        var data = new FormData();
+        data.append('company', company);
+        data.append('email', email);
+        data.append('password', password);
+
+        var url = "http://restful-api.eu-gb.mybluemix.net/companies/create";
+        var client = new XMLHttpRequest();
+        alert("0");
+        client.open("POST", url);
+        alert("1");
+        client.setRequestHeader("Content-Type", "text/plain");
+        alert("1.5");
+        client.send(data);
+        alert("2");
+        if (client.status == 200)
+            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText)
+        else
+            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        alert(client.responseText);
+        client.close();
+    }
+</script>
+
 <!-- Top content -->
 <div class="top-content">
 
@@ -61,7 +102,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                    <form class="form-horizontal" method="post" role="form" action="post_signup.php">
+                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="signup.php" method="post">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
                             <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
