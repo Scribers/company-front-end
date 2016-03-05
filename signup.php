@@ -73,7 +73,7 @@
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
-                alert('POST failed.'+ responseData);
+                alert('POST failed.'+ responseData.status);
             }
         });
     }
