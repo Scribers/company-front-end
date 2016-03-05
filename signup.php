@@ -55,18 +55,16 @@
 
         var datarray = { "name" : company , "mail" : email , "password" : password };
         console.log(datarray);
-        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray);
+        $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray, function(data) {
+            var dataparsed = JSON.parse(data);
+            if(dataparsed.status == "success") {
+                alert("success");
+                setCookie("id", dataparsed.id, 0);
+            }else{
+                alert("Status failed!");
+            }
+        });
         console.log("sent");
-        /*,
-         function(data) {
-         var dataparsed = JSON.parse(data);
-         if(dataparsed.status == "success") {
-         alert("success");
-         setCookie("id", dataparsed.id, 0);
-         }else{
-         alert("Status failed!");
-         }
-         }*/
     }
 </script>
 
@@ -98,7 +96,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="signup.php" method="post">
+                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" <!--action="signup.php"--> method="post">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
                             <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
