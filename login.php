@@ -75,23 +75,7 @@
                             } else {
                                 $pwd = mysql_real_escape_string($_POST[ 'password' ] );
                             }
-                            if ( empty( $erreur ) ) { //si pas d'erreur
-                                $q = "SELECT id FROM t_user WHERE username=:u";
-                                $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                                $sth->bindParam(':u', $u, PDO::PARAM_STR, 24);
-                                $sth->execute();
-                                if ( $sth->rowCount()!= 0 ) {
-                                    $erreur['user'] = "Nom d'utilisateur déjà utilisé.";
-                                }
-                                $q = "SELECT id FROM t_user WHERE email=:e";
-                                $sth = $dbc -> prepare($q,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                                $sth->bindParam(':e', $e, PDO::PARAM_STR, 24);
-                                $sth->execute();
-                                if ( $sth->rowCount()!= 0 ) {
-                                    $erreur['email'] = 'Adresse email déjà utilisée.';
-                                }
-                            }
-                            if ( empty( $erreur ) ) { //si pas d'erreur
+                            if ( empty( $erreur ) ) { //si pas d'erreur todo change request
                                 $q = "INSERT INTO t_user ( id , username , password, email, company) VALUES ('',:u, :pwd, :e, :c)";
                                 $sth = $dbc -> prepare($q);
                                 $r = $sth ->execute(array(':u'=>$u,':pwd'=>SHA1($pwd),':e'=>$e,':c'=>$c));
