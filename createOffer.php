@@ -91,7 +91,8 @@
                             <p>Entrez la description de l'annonce ci-dessous :</p>
                         </div>
                         <div class="form-top-right">
-                            <i class="fa fa-key"></i>
+                            <i class="fa fa-briefcase"></i>
+                            <i class="fa fa-plus" style="font-size: small; margin-left: -13px;"></i>
                         </div>
                     </div>
                     <div class="form-bottom">
@@ -111,8 +112,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="nomRegister" class="col-sm-3 control-label">Description</label>
-                                <div class="col-lg-8">
-                                    <input type="text" name="desc" placeholder="Description ..."/>
+                                <div class="col-sm-8">
+                                    <textarea rows="5" type="text" name="desc" placeholder="Description ..."></textarea>
                                 </div>
                             </div>
                             <div class="form-group">

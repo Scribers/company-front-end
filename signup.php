@@ -101,7 +101,8 @@
                             <p>Entrez votre nom de compte et votre mot de passe :</p>
                         </div>
                         <div class="form-top-right">
-                            <i class="fa fa-key"></i>
+                            <i class="fa fa-user"></i>
+                            <i class="fa fa-plus" style="font-size: small; margin-left: -13px;"></i>
                         </div>
                     </div>
                     <div class="form-bottom">
