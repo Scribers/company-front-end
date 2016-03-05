@@ -29,9 +29,50 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <!-- cookies gestion -->
+    <script src="js/cookies.js"></script>
 </head>
 
 <body>
+<script>
+    function sendForm() {
+        var email = document.forms["signupForm"]["email"].value;
+        var password = document.forms["signupForm"]["password"].value;
+        if (email == null || email == "") {
+            alert("Vous devez spécifier un email!");
+            return false;
+        }
+        if (password == null || password == "") {
+            alert("Vous devez entrer un mot de passe!");
+            return false;
+        }
+
+        var data = new FormData();
+        data.append('email', email);
+        data.append('password', password);
+
+        var url = "http://restful-api.eu-gb.mybluemix.net/login";
+        var client = new XMLHttpRequest();
+        client.open("POST", url);
+        client.setRequestHeader("Content-Type", "text/plain");
+        client.crossDomain = true;
+        client.send(data);
+        if (client.status == 200) {
+            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
+            var response = client.responseText.toJSON();
+            if (response['status'] == 'success') {
+                setCookie("id", response['id'], 0);
+            }
+            else {
+                alert("Erreur! Mauvais mail/Mot de passe!");
+            }
+        }
+        else {
+            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        }
+        client.close();
+    }
+</script>
 
 <!-- Top content -->
 <div class="top-content">
@@ -61,64 +102,23 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <?php
-                        include ( 'restExporter.php' );
-                        $erreur = array();
-                        if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
-                            //Verification des champs
-                            if ( empty( $_POST[ 'email' ] ) ) {
-                                $erreur['email']="Veuillez entrer une adresse email.";
-                            } else {
-                                $e = mysql_real_escape_string($_POST[ 'email' ] );
-                            }
-                            if ( empty( $_POST[ 'password' ] ) ) {
-                                $erreur['password']="Veuillez entrer un mot de passe.";
-                            } else {
-                                $pwd = mysql_real_escape_string($_POST[ 'password' ] );
-                            }
-                            if ( empty( $erreur ) ) { //si pas d'erreur todo change request
-                                $data = array();
-                                $data['email'] = $e;
-                                $data['password'] = sha1($pwd);
-
-                                $r = CallAPI(POST, "/companies/connect", json_encode($data));//todo set good route
-
-                                if ( $r ) {
-                                    echo '<h1>Connexion réussie!</h1>
-                            <p>Vous êtes maintenant connecté.</p>
-                            <p>Vous allez être redirigé !</p>';
-                                    echo "</div></div>";
-                                    include ( 'includes/footer.php' );
-                                    $url = "connect.php";
-                                    function redirige($url)
-                                    {
-                                        die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
-                                    }
-                                    redirige($url);
-                                }
-                                exit();
-                            }
-                        }
-                        ?>
-                        <form class="form-horizontal" method="post" role="form">
+                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="login.php" method="post">
                             <span id="titleForm">Inscription</span>
                             <div class="form-group">
                                 <label for="emailRegister" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-8">
-                                    <input type="email" class="form-control" <?php if(isset($_POST['email']) && empty($erreur['email'])){echo 'value="'.$_POST['email'].'"';} ?> name="email" placeholder="Email">
-                                    <?php if(isset($_POST['email']) && !empty($erreur['email'])){echo '<span class="text-danger">'.$erreur['email'].'</span>';}?>
+                                    <input type="email" name="email" placeholder="Email"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="passwordRegister" class="col-sm-3 control-label">Mot de passe</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" <?php if(isset($_POST['password']) && empty($erreur['password'])){echo 'value="'.$_POST['password'].'"';} ?> name="password" placeholder="Mot de passe">
-                                    <?php if(isset($_POST['password']) && !empty($erreur['password'])){echo '<span class="text-danger">'.$erreur['password'].'</span>';}?>
+                                    <input type="password" name="password" placeholder="Mot de passe."/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <button type="submit" class="btn btn-default">Se connecter</button>
+                                    <input type="submit" class="btn btn-default" value="Se connecter"/>
                                 </div>
                             </div>
                         </form>

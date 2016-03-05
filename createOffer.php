@@ -29,9 +29,36 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <!-- cookies gestion -->
+    <script src="js/cookies.js"></script>
 </head>
 
 <body>
+<script>
+    function sendForm() {
+        var title = document.forms["signupForm"]["title"].value;
+        if (title == null || title== "") {
+            alert("Vous devez spécifier un email!");
+            return false;
+        }
+
+        var data = new FormData();
+        data.append('title', title);
+
+        var url = "http://restful-api.eu-gb.mybluemix.net/login";
+        var client = new XMLHttpRequest();
+        client.open("POST", url);
+        client.setRequestHeader("Content-Type", "text/plain");
+        client.send(data);
+        if (client.status == 200)
+            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText)
+        else
+            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        client.close();
+        document.cookie.toJSON()
+        document.cookie['lol'] = 4;
+    }
+</script>
 
 <!-- Top content -->
 <div class="top-content">
@@ -61,49 +88,17 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <?php
-                        $erreur = array();
-                        if($_SERVER['REQUEST_METHOD']=='POST'){ //si post
-                            //Verification des champs
-                            if ( empty( $_POST[ 'title' ] ) ) {
-                                $erreur['title']="Veuillez entrer un intitulé.";
-                            } else {
-                                $c = mysql_real_escape_string($_POST[ 'title' ] );
-                            }
-                            if ( empty( $erreur ) ) { //si pas d'erreur todo change request
-                                $q = "INSERT INTO t_user ( id , username , password, email, company) VALUES ('',:u, :pwd, :e, :c)";
-                                $sth = $dbc -> prepare($q);
-                                $r = $sth ->execute(array(':u'=>$u,':pwd'=>SHA1($pwd),':e'=>$e,':c'=>$c));
-
-                                if ( $r ) {
-                                    echo '<h1>Inscription réussie!</h1>
-                            <p>Vous êtes maintenant enregistré.</p>
-                            <p>Vous allez être redirigé !</p>';
-                                    echo "</div></div>";
-                                    include ( 'includes/footer.php' );
-                                    $url = "connect.php";
-                                    function redirige($url)
-                                    {
-                                        die('<meta http-equiv="refresh" content="3;URL='.$url.'">');
-                                    }
-                                    redirige($url);
-                                }
-                                exit();
-                            }
-                        }
-                        ?>
-                        <form class="form-horizontal" method="post" role="form">
+                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="createOffer.php" method="post">
                             <span id="titleForm">Inscription</span>
                             <div class="form-group">
                                 <label for="nomRegister" class="col-sm-3 control-label">Intitulé</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" <?php if(isset($_POST['title']) && empty($erreur['title'])){echo 'value="'.$_POST['title'].'"';} ?> name="title" placeholder="Intitulé">
-                                    <?php if(isset($_POST['title']) && !empty($erreur['title'])){echo '<span class="text-danger">'.$erreur['title'].'</span>';}?>
+                                    <input type="text" name="title" placeholder="Intitulé"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <button type="submit" class="btn btn-default">Créer !</button>
+                                    <input type="submit" class="btn btn-default" value="Créer !"/>
                                 </div>
                             </div>
                         </form>

@@ -29,9 +29,51 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <!-- cookies gestion -->
+    <script src="js/cookies.js"></script>
 </head>
 
 <body>
+
+<script>
+    function sendForm() {
+        var company = document.forms["signupForm"]["company"].value;
+        var email = document.forms["signupForm"]["email"].value;
+        var password = document.forms["signupForm"]["password"].value;
+        if (company == null || company == "") {
+            alert("Vous devez entrer un nom d'entreprise!");
+            return false;
+        }
+        if (email == null || email== "") {
+            alert("Vous devez entrer un email!");
+            return false;
+        }
+        if (password == null || password == "") {
+            alert("Vous devez choisir un mot de passe!");
+            return false;
+        }
+
+        var data = new FormData();
+        data.append('company', company);
+        data.append('email', email);
+        data.append('password', password);
+
+        var url = "http://restful-api.eu-gb.mybluemix.net/companies/create";
+        var client = new XMLHttpRequest();
+        client.open("POST", url);
+        client.setRequestHeader("Content-Type", "text/plain");
+        client.crossDomain = true;
+        client.send(data);
+        if (client.status == 200) {
+            alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
+            //setCookie("id", client.responseText.toJSON()['company_id'], 0);
+        }
+        else {
+            alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
+        }
+        client.close();
+    }
+</script>
 
 <!-- Top content -->
 <div class="top-content">
@@ -61,7 +103,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                    <form class="form-horizontal" method="post" role="form" action="post_signup.php">
+                    <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="signup.php" method="post">
                         <span id="titleForm">Inscription</span>
                         <div class="form-group">
                             <label for="nomRegister" class="col-sm-3 control-label">Entreprise</label>
@@ -83,7 +125,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-8">
-                                <input type="submit" class="btn btn-default">S'inscrire</input>
+                                <input type="submit" class="btn btn-default" value="S'inscrire !"/>
                             </div>
                         </div>
                     </form>
