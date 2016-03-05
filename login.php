@@ -59,11 +59,11 @@
         client.send(data);
         if (client.status == 200)
             alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
-            var response = client.responseText.toJSON();
+            /*var response = client.responseText.toJSON();
             if(response['status'] == 'success')
                 setCookie("id", response['id'], 0);
             else
-                alert("Erreur! Mauvais mail/Mot de passe!");
+                alert("Erreur! Mauvais mail/Mot de passe!");*/
         else
             alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
         client.close();
