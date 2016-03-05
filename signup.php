@@ -53,15 +53,13 @@
             return false;
         }
 
-        var datarray = new FormData();
-        datarray.append('company', company);
-        datarray.append('email', email);
-        datarray.append('password', password);
+        var datarray = { "company" : company , "email" : email , "password" : password };
+        alert(datarray);
         $.ajax({
             type: 'POST',
-            url: 'http://restful-api.eu-gb.mybluemix.net/users/create',
+            url: 'http://restful-api.eu-gb.mybluemix.net/companies/create',
             crossDomain: true,
-            data: JSON.stringify(datarray),
+            data: datarray,
             dataType: 'json',
             success: function(responseData, textStatus, jqXHR) {
                 var dataparsed = JSON.parse(responseData);
@@ -69,7 +67,7 @@
                     alert("success");
                     setCookie("id", dataparsed.id, 0);
                 }else{
-                    alert("Status failed");
+                    alert("Status failed!");
                 }
             },
             error: function (responseData, textStatus, errorThrown) {
