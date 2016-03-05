@@ -56,19 +56,15 @@
         var datarray = { "company" : company , "email" : email , "password" : password };
         alert(datarray);
         $.post("http://restful-api.eu-gb.mybluemix.net/companies/create", datarray,
-            function(responseData, textStatus, jqXHR) {
-                var dataparsed = JSON.parse(responseData);
+            function(data) {
+                var dataparsed = JSON.parse(data);
                 if(dataparsed.status == "success") {
                     alert("success");
                     setCookie("id", dataparsed.id, 0);
                 }else{
                     alert("Status failed!");
                 }
-            }, function (responseData, textStatus, errorThrown) {
-                console.log(responseData);
-                alert('POST failed.'+ responseData.status);
-            }
-        );
+            });
     }
 </script>
 
