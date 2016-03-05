@@ -62,10 +62,7 @@
 </script>
 
 <!-- Top content -->
-<div class="top-content">
-
-    <div class="inner-bg">
-        <div class="container">
+        <div class="container" style="margin-top: 70px;">
             <?php include("includes/nav.php") ?>
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
@@ -113,10 +110,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
-
 
 <!-- Javascript -->
 <script src="js/jquery-2.2.1.min.js"></script>
