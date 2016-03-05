@@ -1,3 +1,5 @@
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/js.cookie.js"></script>
 <!-- navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -47,8 +49,6 @@
         success: function (data) {
             $.each(data.themes, function( index, theme ) {
                 $('#theme-selector').find('ul.dropdown-menu').append('<li><a href="#" theme-url="'+ theme.cssMin +'">'+ theme.name +'</a></li>');
-//                console.log(theme.name);
-//                console.log(theme.cssMin);
             });
             $('#theme-selector').find('ul.dropdown-menu').find('a').each(function( index ) {
                 $(this).click(function() {
