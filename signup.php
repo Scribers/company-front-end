@@ -66,6 +66,7 @@
             success: function(responseData, textStatus, jqXHR) {
                 var dataparsed = JSON.parse(responseData);
                 if(dataparsed.status == "success") {
+                    alert("success");
                     setCookie("id", dataparsed.id, 0);
                 }else{
                     alert("Status failed");
