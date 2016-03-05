@@ -81,6 +81,7 @@
         url: 'http://restful-api.eu-gb.mybluemix.net/companies/0/offers',
         data: { get_param: 'value' },
         dataType:'json',
+        crossDomain : true,
         success: function (data) {
             //var content = data.content;
             console.log(data);
