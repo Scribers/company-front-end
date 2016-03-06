@@ -123,7 +123,7 @@
         $.post("https://restful-api.eu-gb.mybluemix.net/login", datarray, success);
     }
     function test(){
-        Cookies.set('id', '0');
+        Cookies.set('id', '19');
     }
 </script>
 
