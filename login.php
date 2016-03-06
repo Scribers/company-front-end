@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" method="post">
+                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()" action="index.php" role="form" method="post">
                             <span id="titleForm">Inscription</span>
                             <div class="form-group">
                                 <label for="emailRegister" class="col-sm-3 control-label">Email</label>
