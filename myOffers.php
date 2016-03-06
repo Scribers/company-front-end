@@ -143,7 +143,7 @@
         var dataUrl = document.getElementById('qrcode-area').toDataURL(); //attempt to save base64 string to server using this var
         var windowContent = '<!DOCTYPE html>';
         windowContent += '<html>';
-        windowContent += '<head><title>' + $("canvas#qrcode-area").attr("text") + '</title></head>';
+        windowContent += '<head><title>' + "QRJob" + '</title></head>';
         windowContent += '<body>';
         windowContent += '<img src="' + dataUrl + '">';
         windowContent += '</body>';
