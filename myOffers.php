@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>LookingForJob Manager - Mes offres</title>
+    <title>QRJob Manager - Mes offres</title>
     <link id="bootstrap-sheet" rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css">

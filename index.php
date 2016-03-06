@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>LookingForJob Manager - Accueil</title>
+    <title>QRJob Manager - Accueil</title>
     <link id="bootstrap-sheet" rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link rel="icon" type="image/png" href="img/icon.png" />
