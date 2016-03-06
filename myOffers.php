@@ -56,51 +56,60 @@
 <script>setActive("myOffers");</script>
 <script src="js/jquery.qrcode-0.12.0.min.js"></script>
 <script>
-    $.get("http://restful-api.eu-gb.mybluemix.net/companies/"+ Cookies.get("id") +"/offers", function (data) {
-        /*data = {
-            "status": "success",
-            "content": [{"id": 43, "company_id": 42, "title": "Hello!"}, {
-                "id": 46,
-                "company_id": 42,
-                "title": "Hello2"
-            }]
-        };*/
+    var orgname;
+    var desc;
+    $.get("http://restful-api.eu-gb.mybluemix.net/companies/"+ Cookies.get("id"), function (data) {
+        orgname = data.content.name;
+        desc = data.content.short_description;
+    }).done(function() {
+        $.get("http://restful-api.eu-gb.mybluemix.net/companies/"+ Cookies.get("id") +"/offers", function (data) {
+            /*data = {
+             "status": "success",
+             "content": [{"id": 43, "company_id": 42, "title": "Hello!"}, {
+             "id": 46,
+             "company_id": 42,
+             "title": "Hello2"
+             }]
+             };*/
 
-        console.log(data); //TODO: remove this shit
-        $.each(data.content, function (index, value) {
-            console.log("eioaze : " + value.type_id);
-            var type ="";
-            switch (value.type_id){
-                case 0:
-                    type = "CDD";
-                    break;
-                case 1:
-                    type = "CDI";
-                    break;
-                case 2:
-                    type = "Stage";
-                    break;
-                case 3:
-                    type = "Job étudiant";
-                    break;
-                default:
-                    type = value.type_id;
-            }
-            console.log(type);
+            console.log(data); //TODO: remove this shit
+            $.each(data.content, function (index, value) {
+                console.log("eioaze : " + value.type_id);
+                var type ="";
+                switch (value.type_id){
+                    case 0:
+                        type = "CDD";
+                        break;
+                    case 1:
+                        type = "CDI";
+                        break;
+                    case 2:
+                        type = "Stage";
+                        break;
+                    case 3:
+                        type = "Job étudiant";
+                        break;
+                    default:
+                        type = value.type_id;
+                }
+                console.log(type);
 
-            $("tbody#table-body").append('<tr><td>' + value.title + '</td>' +
-                '<td>' + type + '</td>' +
-                '<td>' + value.rome_id + '</td>' +
+                $("tbody#table-body").append('<tr><td>' + value.title + '</td>' +
+                    '<td>' + type + '</td>' +
+                    '<td>' + value.rome_id + '</td>' +
 //                '<td data-dateformat="DD-MMM-YYYY">' +value.date +'</td>' +
-                '<td data-dateformat="YYYY-MM-DD">' +value.date +'</td>' +
-                '<td><a href="offer.php?id=' + value.id + '">' +
-                '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
-                '<span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a>' +
-                '<a href="#" onclick="getQRCode(this)" offer="' + value.name + '" qrcode-data="' + value.id + ',' + value.title + ',' + value.description + '">' +
-                '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
-                '<span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
+                    '<td data-dateformat="YYYY-MM-DD">' +value.date +'</td>' +
+                    '<td><a href="offer.php?id=' + value.id + '">' +
+                    '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
+                    '<span class="glyphicon glyphicon-search" aria-hidden="true"> Gérer</span></button></a>' +
+                    '<a href="#" onclick="getQRCode(this)" offer="' + value.name + '" qrcode-data="' + Cookies.get("id") + ',' + orgname + ',' + desc + '">' +
+                    '<button type="button" class="btn btn-primary btn-sm" aria-label="Left Align"> ' +
+                    '<span class="glyphicon glyphicon-qrcode" aria-hidden="true"> QRCode</span></button></a></td></tr>');
+            });
         });
     });
+
+
 </script>
 <script>
     var img = new Image();   // Crée un nouvel objet Image
