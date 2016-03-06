@@ -108,9 +108,8 @@
 </script>
 <script>
     function getQRCode(button) {
-        /*var data = $(button).attr('qrcode-data');
-        var splitted = $(data).split(',');
-        console.log(splitted);*/
+        var splitted = $(button).attr('qrcode-data').split(',');
+        var json ="{" + '"id": "' + splitted[0] +'", "name": "' + splitted[1] + '", "description": "' + splitted[2]+ '"}';
         $("#modal").modal();
         myCanvas = document.getElementById("qrcode-area");
         context = myCanvas.getContext("2d");
@@ -118,13 +117,13 @@
         $(myCanvas).qrcode({
             "size": 400,
             "color": "#3a3",
-            "text": myCanvas,
+            "text": json,
             "label": "QRJob",
             "fontcolor": "#0080C0",
             "fill": "#004080",
             "mode": 4,
             "image": img,
-            "mSize": 0.13,
+            "mSize": 0.1,
             "fontname": "sans",
             "value": "H"
         });

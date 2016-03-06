@@ -29,22 +29,41 @@
 <script src="js/get-parser.js"></script>
 <script>
     var id = getUrlParameter("id");
-
+    console.log("id : " +Cookies.get("id"));
     $.get("http://restful-api.eu-gb.mybluemix.net/companies/"+ Cookies.get("id") +"/applications", function (data) {
-        $.each(data, function( index, value ) {
-            $("table#applications").append('<tr><td>'+ value.name +'</td><td>'+ value.mail +'</td>' +
-                '<td onclick="toggleMe(this)" id="'+ value.id +'">'+
-                '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Détails </button>'+
-                '</td><td>'+ value.keywords +'</td></tr>' +
-                '<tr><td colspan="4" toggle="'+ value.id +'">'+ value.cover_letter +
-                '<button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accepter </button>' +
-                '<button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Refuser </button>' +
-                '</td></tr>');
+        //console.log(data);
+        $.each(data.content, function( index, value ) {
+            console.log(value);
+            var name;
+            var mail;
+            $.get("http://restful-api.eu-gb.mybluemix.net/users/"+ value.user_id, function (data) {
+                name = data.content.name;
+                mail = data.content.mail;
+            }).done(function() {
+
+                $.get("http://restful-api.eu-gb.mybluemix.net/offers/" + value.offer_id, function (data) {
+
+                });
+
+
+                $("table#applications").append('<tr><td>'+ name +'</td><td>'+ mail +'</td>' +
+                    '<td onclick="toggleMe(this)" id="'+ value.offer_id +'">'+
+                    '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Détails </button>'+
+                    '</td></tr>' +
+                    '<tr><td colspan="4" toggle="'+ value.offer_id +'">'+ value.cover_letter +
+                    '<button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accepter </button>' +
+                    '<button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Refuser </button>' +
+                    '</td></tr>');
+                $('td[toggle]').hide();
+            });
+
+
+
+
         });
 
     });
-    $('td[toggle]').hide();
-    $('td[toggle]').descendants().hide();
+    //$('td[toggle]').descendants().hide();
 
 </script>
 <script>
