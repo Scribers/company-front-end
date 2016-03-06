@@ -14,18 +14,8 @@
 <div class="container">
     <?php include("includes/nav.php") ?>
 
-    <table class="table table-bordered table-striped sortable">
-        <thead>
-        <tr>
-            <th>Titre de l'offre</th>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody id="table-body">
-        </tbody>
+    <table class="table table-striped" id="applications">
     </table>
-
-    <div id="test"></div>
 
 </div>
 
@@ -40,10 +30,28 @@
 <script>
     var id = getUrlParameter("id");
 
-    $.get( "http://restful-api.eu-gb.mybluemix.net/offers/"+id, function( data ) {
-        $('#test').html(data.content);
-    });
+    $.get("http://restful-api.eu-gb.mybluemix.net/companies/"+ Cookies.get("id") +"/applications", function (data) {
+        $.each(data, function( index, value ) {
+            $("table#applications").append('<tr><td>'+ value.name +'</td><td>'+ value.mail +'</td>' +
+                '<td onclick="toggleMe(this)" id="'+ value.id +'">'+
+                '<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Détails </button>'+
+                '</td><td>'+ value.keywords +'</td></tr>' +
+                '<tr><td colspan="4" toggle="'+ value.id +'">'+ value.cover_letter +
+                '<button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Accepter </button>' +
+                '<button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Refuser </button>' +
+                '</td></tr>');
+        });
 
+    });
+    $('td[toggle]').hide();
+    $('td[toggle]').descendants().hide();
+
+</script>
+<script>
+    function toggleMe(button){
+        var toggleid = $(button).attr("id");
+        $("td[toggle="+ toggleid +"]").slideToggle();
+    }
 </script>
 </body>
 </html>
