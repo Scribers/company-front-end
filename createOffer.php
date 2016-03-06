@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="css/form-elements.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="img/icon.png" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -135,6 +138,32 @@
 <script src="js/scripts.js"></script>
 <script>
     autosize($('textarea'));
+</script>
+<script src="js/jquery-ui.min.js"></script>
+<script>
+    //If you did try to read and understand this, I guess I owe you a beer
+    var outputList = [];
+    $.getJSON( "rom/2015_decembre_naf2008_rome_v13223.json", function( data ) {
+
+        var test = {};
+        data.forEach( function( item ) {
+            var grade = test[item.name] = test[item.name] || {};
+            grade[item.id] = true;
+        });
+
+        for( var wow in test ) {
+            for( var domain in test[wow] ) {
+                outputList.push({ label: wow, value: domain });
+            }
+        }
+    });
+    $( "input[name=title]" ).autocomplete({
+        source: function(request, response) {
+            var results = $.ui.autocomplete.filter(outputList, request.term);
+
+            response(results.slice(0, 10));
+        }
+    });
 </script>
 
 <!--[if lt IE 10]>
