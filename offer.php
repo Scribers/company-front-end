@@ -33,6 +33,9 @@
                     <div class="radio">
                         <label><input type="radio" name="optradio">Pas assez d'expérience</label>
                     </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio">Autre <input type="text"></label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" aria-label="Left Align">
