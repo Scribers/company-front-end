@@ -142,7 +142,7 @@
 <script src="js/jquery-ui.min.js"></script>
 <script>
     //If you did try to read and understand this, I guess I owe you a beer
-    var outputList = [];
+    /*var outputList = [];
     $.getJSON( "rom/2015_decembre_naf2008_rome_v13223.json", function( data ) {
 
         var test = {};
@@ -156,14 +156,26 @@
                 outputList.push({ label: wow, value: domain });
             }
         }
+        console.log(JSON.stringify(outputList));
     });
+    console.log(outputList);
+    console.log(JSON.stringify(outputList));
     $( "input[name=title]" ).autocomplete({
         source: function(request, response) {
             var results = $.ui.autocomplete.filter(outputList, request.term);
-
             response(results.slice(0, 10));
         }
+    });*/
+
+    $.getJSON("rom/formatted_autocompletion_data.json", function(data){
+        $( "input[name=title]" ).autocomplete({
+            source: function(request, response) {
+                var results = $.ui.autocomplete.filter(data, request.term);
+                response(results.slice(0, 10));
+            }
+        });
     });
+
 </script>
 
 <!--[if lt IE 10]>
