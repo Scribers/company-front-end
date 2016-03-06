@@ -35,32 +35,6 @@
 </head>
 
 <body>
-<script>
-    function success(data, status, jqXHR) {
-        console.log(data);
-        if(data.status === "successful") {
-            Cookies.set('id', data.id, { expires: 0, path: '/' });
-            console.log(Cookies.get('id'));
-        }else{
-            alert("Connexion échouée!");
-        }
-    }
-    function sendForm() {
-        var email = document.forms["signupForm"]["email"].value;
-        var password = document.forms["signupForm"]["password"].value;
-        if (email == null || email == "") {
-            alert("Vous devez spécifier un email!");
-            return false;
-        }
-        if (password == null || password == "") {
-            alert("Vous devez entrer un mot de passe!");
-            return false;
-        }
-
-        var datarray = {"mail" : email , "password" : password };
-        $.post("https://restful-api.eu-gb.mybluemix.net/login", datarray, success);
-    }
-</script>
 
 <!-- Top content -->
         <div class="container" style="margin-top: 70px;">
@@ -87,7 +61,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" action="login.php" method="post">
+                        <form class="form-horizontal" name="signupForm" onsubmit="return sendForm()"  role="form" method="post">
                             <span id="titleForm">Inscription</span>
                             <div class="form-group">
                                 <label for="emailRegister" class="col-sm-3 control-label">Email</label>
@@ -121,6 +95,34 @@
 <!--[if lt IE 10]>
 <script src="js/placeholder.js"></script>
 <![endif]-->
+
+<script>
+    function success(data, status, jqXHR) {
+        console.log(data);
+        console.log("hello success");
+        if(data.status === "successful") {
+            Cookies.set('id', data.id, { expires: 0, path: '/' });
+            console.log("ejaejaze: "+Cookies.get('id'));
+        }else{
+            alert("Connexion échouée!");
+        }
+    }
+    function sendForm() {
+        var email = document.forms["signupForm"]["email"].value;
+        var password = document.forms["signupForm"]["password"].value;
+        if (email == null || email == "") {
+            alert("Vous devez spécifier un email!");
+            return false;
+        }
+        if (password == null || password == "") {
+            alert("Vous devez entrer un mot de passe!");
+            return false;
+        }
+
+        var datarray = {"mail" : email , "password" : password };
+        $.post("https://restful-api.eu-gb.mybluemix.net/login", datarray, success);
+    }
+</script>
 
 </body>
 

@@ -1,5 +1,12 @@
 <script src="js/jquery-2.2.1.min.js"></script>
 <script src="js/js.cookie.js"></script>
+<script>
+    if(Cookies.get('id') !== undefined){
+        console.log("connected");
+    } else {
+        console.log("not connected");
+    }
+</script>
 <!-- navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">

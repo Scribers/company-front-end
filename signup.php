@@ -77,6 +77,7 @@
             "name": company, "mail": email, "password": password,
             "short_description": short_desc, "description": desc, "details": null
         };
+        console.log(datarray);
         $.post("https://restful-api.eu-gb.mybluemix.net/companies/create", datarray, success);
     }
 </script>
