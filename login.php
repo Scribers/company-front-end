@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-8">
-                                    <input type="submit" class="btn btn-default" value="Se connecter"/>
+                                    <input onclick="test()" type="submit" class="btn btn-default" value="Se connecter"/>
                                 </div>
                             </div>
                         </form>
@@ -121,6 +121,9 @@
 
         var datarray = {"mail" : email , "password" : password };
         $.post("https://restful-api.eu-gb.mybluemix.net/login", datarray, success);
+    }
+    function test(){
+        Cookies.set('id', '0');
     }
 </script>
 
